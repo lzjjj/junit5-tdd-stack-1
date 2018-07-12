@@ -43,4 +43,28 @@ public class ParkingBoyTest {
 
         }
     }
+    @Test
+    public void should_get_car_success_when_call_boyUnPark_given_rightReceipt() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        parkingBoy.addParkingLot(parkingLot);
+        Receipt receipt = parkingBoy.boyPark(new Car());
+        try{
+            parkingBoy.boyUnPark(receipt);
+
+        }catch (RuntimeException exception){
+            fail("should unPark successfully");
+        }
+    }
+    @Test
+    public void should_get_car_unSuccess_when_call_boyUnPark_given_wrongReceipt() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Receipt receipt = new Receipt();
+        try{
+            parkingBoy.boyUnPark(receipt);
+            fail("should unPark successfully");
+        }catch (RuntimeException exception){
+        }
+    }
 }

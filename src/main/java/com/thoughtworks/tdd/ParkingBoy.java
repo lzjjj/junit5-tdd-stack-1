@@ -10,25 +10,37 @@ public class ParkingBoy {
         this.parkingLotList = new ArrayList<>();
     }
 
-    public void boyPark(Car car) {
+    public Receipt boyPark(Car car) {
         if(parkingLotList.size()==0){
             throw new RuntimeException();
         }
         Boolean isParkingSuccess = false;
         for (ParkingLot i : parkingLotList) {
             if (!i.isFull()) {
-                i.park( car );
                 isParkingSuccess = true;
-                return ;
+                return i.park( car );
             }
         }
         if(!isParkingSuccess){
             throw new RuntimeException();
         }
-
+        return  null;
     }
 
     public void addParkingLot(ParkingLot parkingLot) {
         parkingLotList.add( parkingLot );
+    }
+
+    public void boyUnPark(Receipt receipt) {
+        Boolean isParkingSuccess = false;
+        for (ParkingLot i : parkingLotList) {
+            if (i.unPark( receipt )!=null) {
+                isParkingSuccess = true;
+                return;
+            }
+        }
+        if(!isParkingSuccess){
+            throw new RuntimeException(  );
+        }
     }
 }
