@@ -14,33 +14,26 @@ public class ParkingBoy {
         if(parkingLotList.size()==0){
             throw new RuntimeException();
         }
-        Boolean isParkingSuccess = false;
         for (ParkingLot i : parkingLotList) {
             if (!i.isFull()) {
-                isParkingSuccess = true;
                 return i.park( car );
             }
         }
-        if(!isParkingSuccess){
-            throw new RuntimeException();
-        }
-        return  null;
+        throw new RuntimeException();
     }
 
     public void addParkingLot(ParkingLot parkingLot) {
         parkingLotList.add( parkingLot );
     }
 
-    public void boyUnPark(Receipt receipt) {
-        Boolean isParkingSuccess = false;
+    public Car boyUnPark(Receipt receipt) {
+        Car car = null;
         for (ParkingLot i : parkingLotList) {
-            if (i.unPark( receipt )!=null) {
-                isParkingSuccess = true;
-                return;
+            car =i.unPark( receipt );
+            if (car!=null) {
+                return car;
             }
         }
-        if(!isParkingSuccess){
-            throw new RuntimeException(  );
-        }
+        throw new RuntimeException(  );
     }
 }
