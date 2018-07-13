@@ -63,8 +63,8 @@ public class ParkingBoyTest {
         Receipt receipt = parkingBoy.boyPark(car);
         when(parkingLot1.unPark(receipt)).thenReturn(car);
         when(parkingLot2.unPark(receipt)).thenReturn(null);
-        assertThat(car, is(parkingLot1.unPark( receipt )));
-        assertThat(car, not(parkingLot2.unPark( receipt )));
+        assertThat(parkingBoy.boyUnPark(receipt), is(parkingLot1.unPark( receipt )));
+        assertThat(parkingBoy.boyUnPark(receipt), not(parkingLot2.unPark( receipt )));
     }
     @Test
     public void should_get_car_success_when_call_boyUnPark_given_rightReceipt() {

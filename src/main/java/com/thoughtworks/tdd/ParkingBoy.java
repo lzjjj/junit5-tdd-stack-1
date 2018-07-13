@@ -16,7 +16,7 @@ public class ParkingBoy {
         }
         for (ParkingLot i : parkingLotList) {
             if (!i.isFull()) {
-                return i.park( car );
+                return null;
             }
         }
         throw new RuntimeException();
