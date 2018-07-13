@@ -6,8 +6,8 @@ public class Main {
                 "2. 取车 \n" +
                 "请输入您要进行的操作：");
         ScannerStr scannerStr = new ScannerStr();
-        HandleCommandModal handleCommandModal = new HandleCommandModal( scannerStr.getStr() );
-        System.out.print( handleCommandModal.bulidResult() );
+        HandleCommandController handleCommandModal = new HandleCommandController( scannerStr.getStr() );
+        System.out.print( handleCommandModal.buildFirstReturn() );
 
     }
 }
