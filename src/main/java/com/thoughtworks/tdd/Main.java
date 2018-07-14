@@ -1,13 +1,14 @@
 package com.thoughtworks.tdd;
 
 public class Main {
-        public static void main(String[] args) throws Exception {
-        System.out.print("1. 停车\n" +
-                "2. 取车 \n" +
-                "请输入您要进行的操作：");
-        ScannerStr scannerStr = new ScannerStr();
-        HandleCommandController handleCommandModal = new HandleCommandController( scannerStr.getStr() );
-        System.out.print( handleCommandModal.buildFirstReturn() );
-
+    public static void main(String[] args) throws Exception {
+        ParkingLot parkingLot1 = new ParkingLot( 0 );
+        ParkingLot parkingLot2 = new ParkingLot( 1 );
+        ParkingBoy parkingBoy = new ParkingBoy();
+        parkingBoy.addParkingLot( parkingLot1 );
+        parkingBoy.addParkingLot( parkingLot2 );
+        ParkingView parkingView = new ParkingView( parkingBoy );
+        parkingView.parkingStart();
+        parkingView.outputResult();
     }
 }

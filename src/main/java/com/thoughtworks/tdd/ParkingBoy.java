@@ -5,6 +5,15 @@ import java.util.List;
 
 public class ParkingBoy {
     private List<ParkingLot> parkingLotList ;
+    public List <ParkingLot> getParkingLotList() {
+        return parkingLotList;
+    }
+
+    public void setParkingLotList(List <ParkingLot> parkingLotList) {
+        this.parkingLotList = parkingLotList;
+    }
+
+
 
     public ParkingBoy() {
         this.parkingLotList = new ArrayList<>();
@@ -16,7 +25,7 @@ public class ParkingBoy {
         }
         for (ParkingLot i : parkingLotList) {
             if (!i.isFull()) {
-                return null;
+                return i.park( car );
             }
         }
         throw new RuntimeException();

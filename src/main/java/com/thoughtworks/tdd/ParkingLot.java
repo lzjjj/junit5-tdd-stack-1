@@ -6,6 +6,14 @@ public class ParkingLot {
     private int size;
     private HashMap<Receipt,Car> parkingLotMap;
 
+    public HashMap <Receipt, Car> getParkingLotMap() {
+        return parkingLotMap;
+    }
+
+    public void setParkingLotMap(HashMap <Receipt, Car> parkingLotMap) {
+        this.parkingLotMap = parkingLotMap;
+    }
+
     public int getSize() {
         return size;
     }
@@ -39,4 +47,5 @@ public class ParkingLot {
         }
         return parkingLotMap.remove(receipt);
     }
+
 }
