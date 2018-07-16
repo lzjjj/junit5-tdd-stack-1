@@ -4,6 +4,15 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private int size;
+    private String name;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private HashMap <Receipt, Car> parkingLotMap;
 
     public HashMap <Receipt, Car> getParkingLotMap() {
@@ -22,8 +31,9 @@ public class ParkingLot {
         this.size = size;
     }
 
-    public ParkingLot(int size) {
+    public ParkingLot(String name,int size) {
         this.size = size;
+        this.name = name;
         parkingLotMap = new HashMap <>();
     }
 

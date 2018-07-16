@@ -34,6 +34,14 @@ public class ParkingBoy {
     public void addParkingLot(ParkingLot parkingLot) {
         parkingLotList.add( parkingLot );
     }
+    public void deleteParkingLot(int id) {
+        for(int i=0;i<parkingLotList.size();i++){
+            if(i==id){
+                parkingLotList.remove(parkingLotList.get( i ));
+            }
+        }
+
+    }
 
     public Car boyUnPark(Receipt receipt) {
         Car car = null;

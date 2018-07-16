@@ -1,9 +1,9 @@
 package com.thoughtworks.tdd;
 
 public class Router {
-    private HandleCommandController handleCommandController;
+    private ParkingServiceController parkingServiceController;
+    private ParkingManageController parkingManageController;
     private String currentPage;
-    private ParkingView parkingView;
 
     public String getCurrentPage() {
         return currentPage;
@@ -13,46 +13,46 @@ public class Router {
         this.currentPage = currentPage;
     }
 
-    public Router(HandleCommandController handleCommandController, ParkingView parkingView) {
-        this.handleCommandController = handleCommandController;
-        this.parkingView = parkingView;
+    public Router(ParkingServiceController parkingServiceController,ParkingManageController parkingManageController) {
+        this.parkingServiceController = parkingServiceController;
+        this.parkingManageController = parkingManageController;
     }
 
-    public void selectPage(String id,String currentPage) {
+    public String selectServicePage(String id, String currentPage) {
         switch (currentPage) {
             case "main":
-                parkingView.send( handleCommandController.startMsg() );
+                this.currentPage =  parkingServiceController.mainMsg(id);
                 break;
             case "park":
-                parkingView.send( handleCommandController.buildParkingMsg( id ) );
+                this.currentPage = parkingServiceController.buildParkingMsg( id );
                 break;
             case "unPark":
-                parkingView.send( handleCommandController.buildUnParkingMsg( id ) );
+                this.currentPage = parkingServiceController.buildUnParkingMsg( id );
                 break;
-            case "inValid":
-                parkingView.send( handleCommandController.inValidMsg() );
-                parkingView.send( handleCommandController.startMsg() );
+            case "totalMain" :
                 break;
         }
+        return this.currentPage;
     }
 
-    public void handleCommand(String commandStr) {
-        switch (commandStr) {
-            case "1":
-                currentPage = "park";
-                parkingView.send( handleCommandController.buildBeforeParkingMsg() );
-
+    public String selectManagePage(String id, String currentPage) {
+        switch (currentPage) {
+            case "main":
+                this.currentPage = parkingManageController.mainMsg(id);
                 break;
-            case "2":
-                currentPage = "unPark";
-                parkingView.send( handleCommandController.buildBeforeUnParkingMsg() );
-
+            case "parkInfo":
+                this.currentPage =  parkingManageController.buildLotsInfo( );
                 break;
-            default:
-                currentPage = "inValid";
-                this.selectPage( commandStr,currentPage );
+            case "addParkingLot":
+                this.currentPage = parkingManageController.addParkingLot(id );
+                break;
+            case "deleteParkingLot":
+                this.currentPage = parkingManageController.deleteParkingLot( id );
                 break;
         }
-
+        return this.currentPage;
     }
+
+
+
 }
