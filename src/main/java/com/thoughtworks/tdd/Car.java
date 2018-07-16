@@ -1,17 +1,17 @@
 package com.thoughtworks.tdd;
 
 public class Car {
-    private int carId;
+    private String carId;
 
-    public int getCarId() {
+    public String getCarId() {
         return carId;
     }
 
-    public void setCarId(int carId) {
+    public void setCarId(String carId) {
         this.carId = carId;
     }
 
-    public Car(int carId) {
+    public Car(String carId) {
 
         this.carId = carId;
     }

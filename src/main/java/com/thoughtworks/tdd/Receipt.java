@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Receipt {
@@ -21,4 +22,6 @@ public class Receipt {
         this.ReceiptId = ReceiptId;
 
     }
+
+
 }

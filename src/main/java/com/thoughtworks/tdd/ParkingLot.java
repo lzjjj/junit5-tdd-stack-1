@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private int size;
-    private HashMap<Receipt,Car> parkingLotMap;
+    private HashMap <Receipt, Car> parkingLotMap;
 
     public HashMap <Receipt, Car> getParkingLotMap() {
         return parkingLotMap;
@@ -26,26 +26,29 @@ public class ParkingLot {
         this.size = size;
         parkingLotMap = new HashMap <>();
     }
-    public Boolean isFull(){
-        if(getSize()==parkingLotMap.size()){
+
+    public Boolean isFull() {
+        if (getSize() == parkingLotMap.size()) {
             return true;
         }
         return false;
     }
+
     public Receipt park(Car car) {
-        if(this.isFull()) {
+        if (this.isFull()) {
             throw new RuntimeException();
         }
         Receipt receipt = new Receipt();
-        parkingLotMap.put(receipt,car);
+        parkingLotMap.put( receipt, car );
         return receipt;
     }
 
     public Car unPark(Receipt receipt) {
-        if (!parkingLotMap.containsKey( receipt )){
-            return null;
+        for (Receipt key : parkingLotMap.keySet()) {
+            if (key.getReceiptId().equals( receipt.getReceiptId() ))
+                return parkingLotMap.remove( key );
         }
-        return parkingLotMap.remove(receipt);
+        return null;
     }
 
 }
