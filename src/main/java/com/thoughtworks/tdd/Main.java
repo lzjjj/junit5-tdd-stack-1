@@ -11,8 +11,9 @@ public class Main {
         ParkingServiceController parkingServiceController = new ParkingServiceController( parkingBoy, response );
         ParkingManageController parkingManageController = new ParkingManageController( parkingBoy, response );
         MianController mianController = new MianController( response );
-        Router router = new Router( parkingServiceController,parkingManageController );
         String currentPage = "main";
+        Router router = new Router(currentPage);
+
         while(true){
             ScannerStr scannerStr1 = new ScannerStr();
             router.processRequest(scannerStr1.getStr());
