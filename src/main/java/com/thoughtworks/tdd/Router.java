@@ -1,58 +1,56 @@
 package com.thoughtworks.tdd;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Router {
-    private ParkingServiceController parkingServiceController;
-    private ParkingManageController parkingManageController;
-    private String currentPage;
-
-    public String getCurrentPage() {
-        return currentPage;
+    private final String initRoutePath;
+    private String currentPath;
+    private Map<String, BaseController> routeMaps = new HashMap<>();
+    public Router(String initStatus) {
+        this.initRoutePath = initStatus;
+        this.currentPath = initStatus;
     }
 
-    public void setCurrentPage(String currentPage) {
-        this.currentPage = currentPage;
+    public String getCurrentPath() {
+        return currentPath;
     }
 
-    public Router(ParkingServiceController parkingServiceController,ParkingManageController parkingManageController) {
-        this.parkingServiceController = parkingServiceController;
-        this.parkingManageController = parkingManageController;
+    public void setCurrentPath(String currentPath) {
+        this.currentPath = currentPath;
     }
 
-    public String selectServicePage(String id, String currentPage) {
-        switch (currentPage) {
-            case "main":
-                this.currentPage =  parkingServiceController.mainMsg(id);
-                break;
-            case "park":
-                this.currentPage = parkingServiceController.buildParkingMsg( id );
-                break;
-            case "unPark":
-                this.currentPage = parkingServiceController.buildUnParkingMsg( id );
-                break;
-            case "totalMain" :
-                break;
+
+    public void processRequest(String str) {
+        String routePath = buildLocateRoutePath(str);
+        String forwardRouteRule = routeMaps.get(routePath).process();
+        currentPath = routePath;
+        if (forwardRouteRule != null && forwardRouteRule.contains("forward:")) {
+            currentPath = buildForwardRoutePath(forwardRouteRule);
         }
-        return this.currentPage;
     }
 
-    public String selectManagePage(String id, String currentPage) {
-        switch (currentPage) {
-            case "main":
-                this.currentPage = parkingManageController.mainMsg(id);
-                break;
-            case "parkInfo":
-                this.currentPage =  parkingManageController.buildLotsInfo( );
-                break;
-            case "addParkingLot":
-                this.currentPage = parkingManageController.addParkingLot(id );
-                break;
-            case "deleteParkingLot":
-                this.currentPage = parkingManageController.deleteParkingLot( id );
-                break;
+    private String buildForwardRoutePath(String forwardRouteRule) {
+        String forwardRoute = forwardRouteRule.split(":")[1];
+        routeMaps.get(forwardRoute).process();
+        return forwardRoute;
+    }
+
+    private String buildLocateRoutePath(String str) {
+        String subPath = str.isEmpty() ? "" : "/" + translateRequestInput(str);
+        return currentPath + subPath;
+    }
+
+    private String translateRequestInput(String str) {
+        if (Arrays.asList("1", "2").contains(str)) {
+            return str;
+        } else {
+            return "*";
         }
-        return this.currentPage;
     }
 
-
-
+    public void registerRouter(String path, BaseController controller){
+        routeMaps.put(path, controller);
+    }
 }

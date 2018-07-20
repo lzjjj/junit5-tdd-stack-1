@@ -13,25 +13,27 @@ public class Main {
         MianController mianController = new MianController( response );
         Router router = new Router( parkingServiceController,parkingManageController );
         String currentPage = "main";
-        while (true) {
-            mianController.showStartMsg();
-            String inputStr = new ScannerStr().getStr();
-            if (inputStr.equals( "1" )) {
-                parkingServiceController.startMsg();
-                while (true) {
-                    ScannerStr scannerStr1 = new ScannerStr();
-                    currentPage = router.selectServicePage( scannerStr1.getStr(), currentPage );
-                }
-            } else if (inputStr.equals( "2" )) {
-                parkingManageController.buildStartMsg();
-                while (true) {
-                    ScannerStr scannerStr1 = new ScannerStr();
-
-                    currentPage = router.selectManagePage( scannerStr1.getStr(), currentPage );
-                }
-            } else {
-                mianController.showInvalidMsg();
-            }
+        while(true){
+            ScannerStr scannerStr1 = new ScannerStr();
+            router.processRequest(scannerStr1.getStr());
         }
+//        mianController.showStartMsg();
+//        String inputStr = new ScannerStr().getStr();
+//        if (inputStr.equals( "1" )) {
+//            parkingServiceController.startMsg();
+//            while (true) {
+//                ScannerStr scannerStr1 = new ScannerStr();
+//                currentPage = router.selectServicePage( scannerStr1.getStr(), currentPage );
+//            }
+//        } else if (inputStr.equals( "2" )) {
+//            parkingManageController.buildStartMsg();
+//            while (true) {
+//                ScannerStr scannerStr1 = new ScannerStr();
+//
+//                currentPage = router.selectManagePage( scannerStr1.getStr(), currentPage );
+//            }
+//        } else {
+//            mianController.showInvalidMsg();
+//        }
     }
 }
